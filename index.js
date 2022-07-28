@@ -66,6 +66,7 @@ const start = () => {
           break;
         case "Add Department":
           department.addDepartment();
+          start()
           break;
 
         case "Quit":
