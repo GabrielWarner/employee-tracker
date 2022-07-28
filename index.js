@@ -19,8 +19,14 @@ const db = mysql.createConnection(
     
   );
 
-const department = new Department()
 
+db.connect((err) => {
+    if(err){
+        throw err
+    }
+
+})
+const department = new Department(db)
 const start = () => {
   inquirer
     .prompt([
@@ -57,17 +63,26 @@ const start = () => {
         case "View All Roles":
           viewRoles();
           break;
+
         case "Add Role":
           addRole();
           break;
+
         case "View All Departments":
-          department.getDepartments();
-          start();
+          department.getDepartments().then(([data]) => {
+            console.table(data)
+            start()
+          });
           break;
         case "Add Department":
-          department.addDepartment();
-          start()
+          department.addDepartment().then(([rows, fields]) => {
+            console.log(rows)
+            console.log(fields)
+            start()
+        });
+          
           break;
+
 
         case "Quit":
           quit();
