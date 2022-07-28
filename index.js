@@ -62,6 +62,7 @@ const start = () => {
           break;
         case "View All Departments":
           department.getDepartments();
+          start();
           break;
         case "Add Department":
           department.addDepartment();
@@ -75,7 +76,7 @@ const start = () => {
           console.log("thanks for playing!");
           break;
       }
-    });
+    })
 };
 
 const viewEmployees = () => {
