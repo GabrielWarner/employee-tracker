@@ -5,6 +5,7 @@ const cTable = require("console.table");
 
 //importing classes
 const Department = require('./lib/Department')
+const Role = require('./lib/Role')
 
 
 //creating connection to database
@@ -26,7 +27,12 @@ db.connect((err) => {
     }
 
 })
+//creating objects that hold querys
 const department = new Department(db)
+const role = new Role(db)
+
+let departmentsArray = []
+
 const start = () => {
   inquirer
     .prompt([
@@ -61,11 +67,18 @@ const start = () => {
           break;
 
         case "View All Roles":
-          viewRoles();
+          role.getRoles().then(([data]) => {
+            console.table(data)
+            start()
+          });
           break;
 
         case "Add Role":
-          addRole();
+          role.addRole().then(([data])=>{
+
+            start()
+        })
+
           break;
 
         case "View All Departments":
