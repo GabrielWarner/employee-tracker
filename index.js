@@ -6,6 +6,7 @@ const cTable = require("console.table");
 //importing classes
 const Department = require('./lib/Department')
 const Role = require('./lib/Role')
+const Employee = require('./lib/Employee')
 
 
 //creating connection to database
@@ -30,9 +31,9 @@ db.connect((err) => {
 //creating objects that hold querys
 const department = new Department(db)
 const role = new Role(db)
+const employee = new Employee(db)
 
-let departmentsArray = []
-
+//function to run CLI
 const start = () => {
   inquirer
     .prompt([
@@ -54,8 +55,12 @@ const start = () => {
     ])
     .then((ans) => {
       switch (ans.userChoice) {
+        
         case "View All Employees":
-          viewEmployees();
+          employee.getEmployees().then(([data]) => {
+            console.table(data)
+            start()
+          });
           break;
 
         case "Add Employee":
@@ -75,10 +80,8 @@ const start = () => {
 
         case "Add Role":
           role.addRole().then(([data])=>{
-
             start()
         })
-
           break;
 
         case "View All Departments":
@@ -96,7 +99,6 @@ const start = () => {
           
           break;
 
-
         case "Quit":
           quit();
           break;
@@ -108,8 +110,5 @@ const start = () => {
     })
 };
 
-const viewEmployees = () => {
-  console.log("hi");
-};
 
 start();
