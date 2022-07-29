@@ -2,7 +2,7 @@
 //installing npm packages
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-const cTable = require("console.table");
+const figlet = require('figlet')
 //importing classes
 const Department = require("./lib/Department");
 const Role = require("./lib/Role");
@@ -26,6 +26,16 @@ db.connect((err) => {
 const department = new Department(db);
 const role = new Role(db);
 const employee = new Employee(db);
+
+figlet("EMPLOYEE TRACKER", function(err, data) {
+  if(err) {
+    console.log('something went wrong')
+    console.dir(err)
+    return
+  }
+  console.log(data)
+}) 
+
 //function to run CLI
 const start = () => {
   inquirer
