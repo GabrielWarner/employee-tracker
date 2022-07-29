@@ -97,14 +97,13 @@ const start = () => {
         case "Add Department":
           department.addDepartment().then(([rows, fields]) => {
             console.log(rows)
-            console.log(fields)
             start()
         });
           
           break;
 
         case "Quit":
-          quit();
+          process.exit()
           break;
 
         default:
