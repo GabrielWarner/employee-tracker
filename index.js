@@ -27,17 +27,7 @@ const department = new Department(db);
 const role = new Role(db);
 const employee = new Employee(db);
 
-figlet("EMPLOYEE TRACKER", function(err, data) {
-  if(err) {
-    console.log('something went wrong')
-    console.dir(err)
-    return
-  }
-  console.log(data)
-}) 
-
-//function to run CLI
-const start = () => {
+const question = () => {
   inquirer
     .prompt([
       {
@@ -115,7 +105,23 @@ const start = () => {
           break;
       }
     });
+}
+
+
+
+//function to run CLI
+const start = () => {
+  figlet("EMPLOYEE TRACKER", function(err, data) {
+    if(err) {
+      console.log('something went wrong')
+      console.dir(err)
+      return
+    }
+    console.log(data)
+    question()
+  }) 
 };
 
 //calling initial start function. This function runs in a loop because everytime the user chooses an option the start function gets called again
 start();
+
