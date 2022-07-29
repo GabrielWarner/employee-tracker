@@ -64,7 +64,9 @@ const start = () => {
           break;
 
         case "Add Employee":
-          addEmployee();
+          employee.addEmployee().then(([data]) => {
+            start()
+          })
           break;
 
         case "Update Employee Role":
