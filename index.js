@@ -70,7 +70,9 @@ const start = () => {
           break;
 
         case "Update Employee Role":
-          updateEmployee();
+          employee.updateEmployee().then(([data]) => {
+            start()
+          })
           break;
 
         case "View All Roles":
